@@ -24,6 +24,7 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
+      working-directory: ./lambda_function_cicd
       run: |
         pip install \
          --platform manylinux2014_x86_64 \
