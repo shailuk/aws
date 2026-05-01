@@ -24,16 +24,20 @@ GitHub Actions OIDC -
 
 
   Git Commands - 
-  1) git init
-  2) Stage and commit your files - 
+   1) git init
+   2) Stage and commit your files - 
       git add . or git add [folder name]
       git commit -m "Initial commit"
-  3) Rename current branch to main: git branch -M main
-  4) Create the test branch: git checkout -b test
-  5) Add the remote URL : git remote add origin [https://github.com/YOUR_USERNAME/aws.git]
-  6) Verify the connection : git remote -v
-  7) Push the test branch: git push -u origin test
-  8) Push the main branch: git push -u origin main
+   3) Rename current branch to main: git branch -M main
+   4) Create the test branch: git checkout -b test
+   5) Add the remote URL : git remote add origin [https://github.com/YOUR_USERNAME/aws.git]
+   6) Verify the connection : git remote -v
+   7) Push the test branch: git push -u origin test
+   8) Push the main branch: git push -u origin main
+   9) Remove the inner Git folder - rm -rf lambda_function_cicd/.git
+  10) Clear Git's memory : git rm --cached lambda_function_cicd
+
+IMPORTANT : The .yaml file has to be in .github/workflows
 
 
 
