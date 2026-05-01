@@ -1,0 +1,39 @@
+GitHub Actions OIDC -
+  1) How it works in simple terms.
+  2) Request a Token: When your workflow starts, GitHub issues a temporary, short-lived security token.
+  3) Exchange: Your workflow sends this token to AWS.
+  4) Validate: AWS looks at the token and says, "I recognize this token came from Shailesh's specific GitHub repository and branch."
+  5) Grant Access: AWS gives your workflow temporary credentials that expire automatically after the job finishes.
+
+  1) Go to IAM -> Identity providers -> Create provider
+      Provider Type: OIDC
+      Provider URL: https://token.actions.githubusercontent.com
+      Audience: sts.amazonaws.com
+      Enter your github organization name and repo name(Optional)
+
+  2) Create a Role for OIDC
+      Go to IAM -> Roles -> Create Role
+      Select "Web Identity" as the trusted entity type
+      Choose the OIDC provider you created in step 1
+      Set the audience to sts.amazonaws.com
+      Attach the necessary permissions - AWSLambdaFullAccess
+      Name the role (e.g., GitHubActionsServiceRole)
+      Create the role and note down the ARN for use in your GitHub Actions workflow
+
+  3) Make sure the ARN is updated in your deploy.yml file for the "Configure AWS Credentials" step and the "Deploy to AWS Lambda" step.
+
+
+  Git Commands - 
+  1) git init
+  2) Stage and commit your files - 
+      git add . or git add [folder name]
+      git commit -m "Initial commit"
+  3) Rename current branch to main: git branch -M main
+  4) Create the test branch: git checkout -b test
+  5) Add the remote URL : git remote add origin [https://github.com/YOUR_USERNAME/aws.git]
+  6) Verify the connection : git remote -v
+  7) Push the test branch: git push -u origin test
+  8) Push the main branch: git push -u origin main
+
+
+
