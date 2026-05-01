@@ -46,7 +46,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         # Replace this with the ARN of the IAM role you create for OIDC
-        role-to-assume: arn:aws:iam::060662064877:oidc-provider/token.actions.githubusercontent.com
+        role-to-assume: arn:aws:iam::060662064877:role/lambda_git_cicd
         aws-region: us-east-1
 
     - name: Package Lambda Function
@@ -77,7 +77,7 @@ jobs:
           aws lambda create-function \
             --function-name $FUNCTION_NAME \
             --runtime python3.11 \
-            --role arn:aws:iam::060662064877:role/GitHubActionsServiceRole \
+            --role arn:aws:iam::060662064877:role/lambda_git_cicd \
             --handler app.lambda_handler \
             --timeout 300 \
             --zip-file fileb://lambda.zip \
