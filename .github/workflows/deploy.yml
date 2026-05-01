@@ -25,9 +25,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip jq zip
-        pip3 install boto3
+        pip install \
+         --platform manylinux2014_x86_64 \
+         --target ./package \
+         --implementation cp \
+         --python-version 3.11 \
+         --only-binary=:all: \
+         --upgrade \
+         -r requirements.txt
 
     - name: Set environment variables
       id: set-env-vars
